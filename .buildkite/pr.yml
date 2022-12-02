@@ -1,1 +1,46 @@
-steps: []
+tapendium-aliases:
+  merge-main: &merge-main
+    seek-oss/github-merged-pr#v1.1.2:
+      mode: checkout
+
+  docker-cache: &docker-cache
+    seek-oss/docker-ecr-cache#v2.0.0:
+      cache-on:
+        - package-lock.json
+
+  docker: &docker
+    volumes:
+      - /workdir/node_modules
+
+  common: &common
+    - *merge-main
+    - *docker-cache
+    - docker#v5.3.0:
+        <<: *docker
+        tty: false
+
+steps:
+  - label: ':npm: npm install'
+    key: install
+    command: node --version
+    plugins: *common
+
+  - group: ':lint-roller: Lint'
+    steps:
+      - label: ':prettier: Run Format Check'
+        depends_on: install
+        commands:
+          - npm run format:check
+        plugins: *common
+
+      - label: ':eslint: Run Eslint'
+        depends_on: install
+        commands:
+          - npm run eslint
+        plugins: *common
+
+      - label: ':mocha: Run Type Check'
+        depends_on: install
+        commands:
+          - npm run typecheck
+        plugins: *common
