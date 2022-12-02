@@ -1,0 +1,34 @@
+{
+  "name": "@tapendium/cfn-response",
+  "version": "1.0.0",
+  "description": "AWS Cloudformation response module for custom resources",
+  "main": "index.js",
+  "scripts": {
+    "eslint": "npx eslint .",
+    "typecheck": "tsc --noEmit",
+    "format": "npx prettier --ignore-unknown --write .",
+    "format:check": "npx prettier --check ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tapendium/cfn-response.git"
+  },
+  "keywords": [
+    "aws",
+    "cfn-response",
+    "cloudformation",
+    "custom",
+    "resource",
+    "lambda"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "^2.8.0",
+    "typescript": "^4.9.3"
+  }
+}
